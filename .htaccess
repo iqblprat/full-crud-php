@@ -1,0 +1,25 @@
+# Menyembunyikan list file/direktori
+Options -Indexes
+
+# Menyembunyikan tanda tangan server
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Menghilangkan ekstensi .php dari URL
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+    # Mengaktifkan kompresi untuk berbagai tipe konten
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/xml+rss application/xml application/xhtml+xml application/font-woff2 application/x-font-truetype
+
+    # Menghapus bug browser kuno
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent
+</IfModule>
