@@ -67,7 +67,7 @@ if (isset($_POST['tambah'])) {
 
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea id="alamat" name="alamat"></textarea>
+                <textarea id="alamat" name="alamat" class="form-control"></textarea>
             </div>
 
             <div class="mb-3">

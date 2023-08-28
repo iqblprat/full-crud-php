@@ -75,7 +75,7 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea id="alamat" name="alamat" placeholder="Alamat Mahasiswa..."><?= $mahasiswa['alamat']; ?></textarea>
+                <textarea id="alamat" name="alamat" placeholder="Alamat Mahasiswa..." class="form-control"><?= $mahasiswa['alamat']; ?></textarea>
             </div>
 
             <div class="mb-3">
