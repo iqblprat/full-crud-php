@@ -35,6 +35,11 @@ include 'config/app.php';
     <link rel="stylesheet" href="assets-template/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="assets-template/plugins/summernote/summernote-bs4.min.css">
+    <!-- jQuery -->
+    <script src="assets-template/plugins/jquery/jquery.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -47,7 +52,11 @@ include 'config/app.php';
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
         </nav>
         <!-- /.navbar -->
 
@@ -117,7 +126,7 @@ include 'config/app.php';
                             <a href="pegawai.php" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
-                                    Data Pegawai
+                                    Data Pegawai (Realtime)
                                 </p>
                             </a>
                         </li>

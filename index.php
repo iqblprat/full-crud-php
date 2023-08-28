@@ -23,7 +23,21 @@ $title = "Data Barang";
 
 include 'layout/header.php';
 
-$data_barang = select("SELECT * FROM barang");
+if (isset($_POST['filter'])) {
+    $tglAwal = strip_tags($_POST['tglAwal'] . " 00:00:00");
+    $tglAkhir = strip_tags($_POST['tglAkhir'] . " 23:59:59");
+
+    $data_barang = select("SELECT * FROM barang WHERE tanggal BETWEEN '$tglAwal' AND '$tglAkhir' ORDER BY id_barang DESC");
+} else {
+    // pagination
+    $jumlahDataPerhalaman = 4;
+    $jumlahData           = count(select("SELECT * FROM barang"));
+    $jumlahHalaman        = ceil($jumlahData / $jumlahDataPerhalaman);
+    $halamanAktif         = (isset($_GET['halaman']) ? $_GET['halaman'] : 1);
+    $awalData             = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
+
+    $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC LIMIT $awalData, $jumlahDataPerhalaman");
+}
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -126,7 +140,10 @@ $data_barang = select("SELECT * FROM barang");
 
                                 <div class="card-body">
                                     <a href="tambah-barang.php" class="btn btn-primary btn-sm mb-2"><i class="fas fa-plus"></i> Tambah Barang</a>
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <button type="button" class="btn btn-success btn-sm mb-2" data-toggle="modal" data-target="#modalFilter">
+                                        <i class="fas fa-search"></i> Filter Data
+                                    </button>
+                                    <table id="" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -139,15 +156,14 @@ $data_barang = select("SELECT * FROM barang");
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $no = 1; ?>
                                             <?php foreach ($data_barang as $barang) : ?>
                                                 <tr>
-                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $awalData += 1; ?></td>
                                                     <td><?= $barang['nama']; ?></td>
                                                     <td><?= $barang['jumlah']; ?></td>
                                                     <td>Rp. <?= number_format($barang['harga'], 0, ',', '.'); ?></td>
                                                     <td class="text-center">
-                                                        <img src="barcode.php?codetype=Code128&size=20&text<?= $barang['barcode']; ?>&print=true" alt="<?= $barang['barcode']; ?>">
+                                                        <img src="barcode.php?codetype=Code128&size=20&text=<?= $barang['barcode']; ?>&print=true" alt="<?= $barang['barcode']; ?>">
                                                     </td>
                                                     <td><?= date("d/m/Y | H:i:s", strtotime($barang['tanggal'])); ?></td>
                                                     <td width="20%" class="text-center">
@@ -158,6 +174,37 @@ $data_barang = select("SELECT * FROM barang");
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                    <div class="mt-3 justify-content-end d-flex">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <?php if ($halamanAktif) : ?>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?halaman<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                <?php endif; ?>
+
+                                                <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                                                    <?php if ($i == $halamanAktif) : ?>
+                                                        <li class="page-item active"><a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a></li>
+                                                    <?php else : ?>
+                                                        <li class="page-item"><a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a></li>
+                                                    <?php endif; ?>
+                                                <?php endfor; ?>
+
+                                                <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1 ?>" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                <?php endif; ?>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -166,5 +213,34 @@ $data_barang = select("SELECT * FROM barang");
                     </div>
                 </div>
             </section>
+            <!-- Modal Tambah -->
+            <div class="modal fade" id="modalFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title" id="exampleModalLabel">Filter Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="tglAwal">Tanggal Awal</label>
+                                    <input type="date" name="tglAwal" id="tglAwal" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tglAkhir">Tanggal Akhir</label>
+                                    <input type="date" name="tglAkhir" id="tglAkhir" class="form-control">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                            <button type="submit" name="filter" class="btn btn-success">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!-- /.content-wrapper -->
             <?php include 'layout/footer.php'; ?>
