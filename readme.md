@@ -17,5 +17,3 @@ User Login
 3. Akun Operator Barang
 - Username: opmbarang
 - Password: 123456
-
-link akses: localhost/full-crud-php
