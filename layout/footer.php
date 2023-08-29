@@ -58,7 +58,15 @@
 <script src="assets-template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="assets-template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="assets-template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 
+<script>
+    CKEDITOR.replace('alamat', {
+        filebrowserBrowseUrl: 'assets/ckfinder/ckfinder.html',
+        filebrowserUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpLoad&type=Files',
+        height: '400px'
+    });
+</script>
 
 <script>
     $(function() {
