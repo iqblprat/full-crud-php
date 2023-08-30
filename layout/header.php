@@ -142,7 +142,7 @@ include 'config/app.php';
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="logout.php" class="nav-link">
+                            <a href="logout.php" class="nav-link" onclick="return confirm('Yakin ingin logout?')">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     Logout

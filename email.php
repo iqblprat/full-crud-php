@@ -18,8 +18,10 @@ include 'layout/header.php';
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container mt-5">
-        <i class="fas fa-envelope"></i>
-        <h1>Kirim Email</h1>
+        <h1>
+            <i class="fas fa-envelope"></i>
+            Kirim Email
+        </h1>
         <hr>
         <form action="email-proses.php" method="post">
             <div class="mb-3">
