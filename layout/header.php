@@ -60,9 +60,9 @@ include 'config/app.php';
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="index.php" class="brand-link">
                 <img src="assets-template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light"><small>FULL CRUD PHP MYSQL</small></span>
             </a>
 
             <!-- Sidebar -->
@@ -95,22 +95,28 @@ include 'config/app.php';
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Daftar Menu</li>
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link">
-                                <i class="nav-icon fas fa-box"></i>
-                                <p>
-                                    Data Barang
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="mahasiswa.php" class="nav-link">
-                                <i class="nav-icon fas fa-user-graduate"></i>
-                                <p>
-                                    Data Mahasiswa
-                                </p>
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 2) : ?>
+                            <li class="nav-item">
+                                <a href="index.php" class="nav-link">
+                                    <i class="nav-icon fas fa-box"></i>
+                                    <p>
+                                        Data Barang
+                                    </p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 3) : ?>
+                            <li class="nav-item">
+                                <a href="mahasiswa.php" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate"></i>
+                                    <p>
+                                        Data Mahasiswa
+                                    </p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
                         <li class="nav-item">
                             <a href="akun.php" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
