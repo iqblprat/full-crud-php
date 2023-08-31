@@ -38,6 +38,10 @@ if (isset($_POST['filter'])) {
 
     $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC LIMIT $awalData, $jumlahDataPerhalaman");
 }
+
+$data_mahasiswa = select("SELECT * FROM mahasiswa");
+$data_akun = select("SELECT * FROM akun");
+$data_pegawai = select("SELECT * FROM pegawai");
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -69,14 +73,17 @@ if (isset($_POST['filter'])) {
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <?php
+                            $totalBarang = count(select("SELECT * FROM barang"));
+                            ?>
+                            <h3><?= $totalBarang; ?></h3>
 
-                            <p>New Orders</p>
+                            <p>Data Barang</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fas fa-boxes"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -84,14 +91,17 @@ if (isset($_POST['filter'])) {
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <?php
+                            $totalMahasiswa = count($data_mahasiswa);
+                            ?>
+                            <h3><?= $totalMahasiswa; ?></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Data Mahasiswa</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fas fa-user-graduate"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="mahasiswa.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -99,14 +109,17 @@ if (isset($_POST['filter'])) {
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <?php
+                            $totalAkun = count($data_akun);
+                            ?>
+                            <h3><?= $totalAkun; ?></h3>
 
-                            <p>User Registrations</p>
+                            <p>Data Akun</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="akun.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -114,14 +127,17 @@ if (isset($_POST['filter'])) {
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <?php
+                            $totalPegawai = count($data_pegawai);
+                            ?>
+                            <h3><?= $totalPegawai; ?></h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Data Pegawai</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="fas fa-user-tie"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="pegawai.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
